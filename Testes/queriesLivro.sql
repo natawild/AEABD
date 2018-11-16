@@ -42,8 +42,10 @@ DELETE FROM Autor
                     ON a.idAutor=la.Autor
                    WHERE a.Nome = 'Zeferino Livros'); 
 		
-        
-        
+    
+    
+DELETE FROM Autor, LivroAutor, Livro 
+        WHERE  a.idAutor=la.Autor AND a.Nome = 'Zeferino Livros' AND l.idLivro=la.Livro;      
 	
 
 
