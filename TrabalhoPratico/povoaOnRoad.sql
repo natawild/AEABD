@@ -53,10 +53,11 @@ INSERT INTO `Funcionario` (`idFuncionario`, `data_contrato`, `salario`, `telemov
 VALUES (1, '1993-12-24', '1000.00', '933337717', 'celia@gmail.com', 'Natália Lemos', 13, 1,'rua da Costa', null), 
 (idFuncionario, '2015-12-24', '1000.00', '933337717', 'celia@gmail.com', 'Natália Lemos', 13, 1,'rua da Costa', null); 
 
+
+
 INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`,`precoAluguer`, `kmsPercorrido`, `Seguro`, `campanhaDesconto`,`Funcionario`, `caucao`) 
 VALUES (1, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 1, 1,250.00, 1000.00,1,0.00,1,500), 
 (idAluguer, '1993-12-24', '1993-12-24', '1993-12-24', '1993-12-24', 1, 1,250.00, 1000.00,1,0.00,1,500); 
-
 
 
 
