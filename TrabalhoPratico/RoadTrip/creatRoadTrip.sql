@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `roadTrip`.`Aluguer` (
   `dataRealEntrega` DATE NULL,
   `Cliente` INT NOT NULL,
   `Veiculo` INT NOT NULL,
-  `precoAluguer` DECIMAL(8,2) NULL CHECK (precoAluguer>=0),
+  `precoAluguer` DECIMAL(8,2)  NOT NULL ,
   `kmsPercorrido` DECIMAL(8,2) NULL,
   `Seguro` INT NOT NULL,
   `campanhaDesconto` FLOAT NULL,

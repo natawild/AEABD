@@ -20,3 +20,57 @@ end if;
 end 
 $$
 
+-- trigger para delimitar a idade do cliente pois ele deverá ter mais de 18 anos 
+-- drop trigger clienteInvalido
+-- drop trigger idadeInvalida
+
+delimiter $$
+create trigger idadeInvalida
+before insert on Cliente
+for each row 
+begin
+DECLARE msg varchar(255);
+
+if((datediff(now(),new.DataNascimento))/365<18) -- temos de /365 porque datediff devolve o número de dias 
+Then 
+ set msg= 'Não tem idade minima para conduzir';
+          SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg; 
+
+end if; 
+end 
+$$
+
+-- atualizar o valor do aluguer 
+-- drop trigger atualizarValor
+-- precoPorDia*diasDeAluguer+seguro; 
+
+delimiter $$
+create trigger atualizarValor 
+before insert on Aluguer
+for each row 
+begin
+	declare totalAluguer decimal (8,2);
+	declare seguro decimal (8,2);
+	declare precoDocarroNovo decimal (8,2);
+	declare taxas decimal (8,2);
+	declare diasDeAluguer decimal (8,2);
+	declare anosDoCarro int; 
+	declare precoPorDia decimal (8,2);
+    
+	select precoSeguro into seguro from Seguro where idSeguro= New.Seguro;
+	select precoEmNovo into precoDocarroNovo from Veiculo where idVeiculo=New.Veiculo; 
+	select taxaDesvalorizacao into taxas from Veiculo where idVeiculo=New.Veiculo; 
+	SELECT TIMESTAMPDIFF(YEAR, curdate(), anoCompra) into anosDoCarro from Veiculo where idVeiculo=New.Veiculo; 
+
+	set diasDeAluguer := datediff(New.dataPrevistaEntrega,New.dataPrevistaLevantamento) ; 
+	set precoPorDia :=(precoDocarroNovo - (precoDocarroNovo*taxas*anosDoCarro))/365; 
+  
+	if New.precoAluguer is null then
+		set New.precoAluguer = precoPorDia*diasDeAluguer+seguro ; 
+	end if ; 
+  
+end; $$
+
+
+
+
