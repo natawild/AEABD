@@ -51,6 +51,9 @@ SELECT TIMESTAMPDIFF(YEAR, dataAluguer, CURDATE()) from Aluguer;
 INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`, `kmsPercorrido`, `Seguro`, `campanhaDesconto`,`Funcionario`, `caucao`) 
 VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 11, 11, 900.00,1,0.00,2,500); 
 
+UPDATE Aluguer
+SET kmsPercorrido = 500 WHERE idAluguer=1; 
+
 
 
 
