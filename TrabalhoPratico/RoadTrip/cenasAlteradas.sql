@@ -21,7 +21,7 @@ USE `roadTrip` ;
 DROP TABLE IF EXISTS `roadTrip`.`Pais` ;
 
 CREATE TABLE IF NOT EXISTS `roadTrip`.`Pais` (
-  `idPais` INT NOT NULL AUTO_INCREMENT,
+  `idPais` INT NOT NULL,
   `designacao` TEXT NULL,
   PRIMARY KEY (`idPais`))
 ENGINE = InnoDB;
@@ -33,9 +33,9 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `roadTrip`.`Cidade` ;
 
 CREATE TABLE IF NOT EXISTS `roadTrip`.`Cidade` (
-  `idCidade` INT NOT NULL AUTO_INCREMENT,
+  `idCidade` INT NOT NULL,
   `designacao` TEXT NULL,
-  `pais` INT NULL,
+  `pais` INT NOT NULL,
   PRIMARY KEY (`idCidade`),
   CONSTRAINT `fk_Cidade_Pais1`
     FOREIGN KEY (`pais`)
@@ -53,17 +53,17 @@ CREATE INDEX `fk_Cidade_Pais1_idx` ON `roadTrip`.`Cidade` (`pais` ASC) VISIBLE;
 DROP TABLE IF EXISTS `roadTrip`.`Funcionario` ;
 
 CREATE TABLE IF NOT EXISTS `roadTrip`.`Funcionario` (
-  `idFuncionario` INT NOT NULL AUTO_INCREMENT,
+  `idFuncionario` INT NOT NULL,
   `data_contrato` DATE NOT NULL,
-  `salario` DECIMAL(8,2) NOT NULL CHECK (salario>=500),
+  `salario` DECIMAL(8,2) NOT NULL,
   `telemovel` INT NULL,
   `email` VARCHAR(45) NULL,
-  `nome` VARCHAR(45) NULL,
+  `nome` VARCHAR(80) NULL,
   `FuncionarioSuperior` INT NULL,
-  `cidade` INT NULL,
-  `pais` INT NULL,
+  `cidade` INT NOT NULL,
+  `pais` INT NOT NULL,
   `rua` VARCHAR(75) NULL,
-  `dataNascimento` DATE NULL,
+  `dataNascimento` DATE NOT NULL,
   PRIMARY KEY (`idFuncionario`),
   CONSTRAINT `fk_FuncionarioSuperior`
     FOREIGN KEY (`FuncionarioSuperior`)
@@ -95,9 +95,9 @@ CREATE INDEX `fk_Funcionario_Pais1_idx` ON `roadTrip`.`Funcionario` (`pais` ASC)
 DROP TABLE IF EXISTS `roadTrip`.`Veiculo` ;
 
 CREATE TABLE IF NOT EXISTS `roadTrip`.`Veiculo` (
-  `idVeiculo` INT NOT NULL AUTO_INCREMENT,
+  `idVeiculo` INT NOT NULL,
   `matricula` VARCHAR(20) NOT NULL,
-  `precoEmNovo` DECIMAL(8,2) NULL CHECK (precoEmNovo>=0),
+  `precoEmNovo` DECIMAL(8,2) NULL,
   `marca` VARCHAR(50) NULL,
   `modelo` VARCHAR(50) NULL,
   `nr_Kms` DECIMAL(8,2) NULL,
@@ -113,7 +113,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `roadTrip`.`Cliente` ;
 
 CREATE TABLE IF NOT EXISTS `roadTrip`.`Cliente` (
-  `idCliente` INT NOT NULL AUTO_INCREMENT,
+  `idCliente` INT NOT NULL,
   `nome` VARCHAR(80) NULL,
   `nif` INT(5) NULL,
   `dataNascimento` DATE NOT NULL,
@@ -147,10 +147,10 @@ CREATE INDEX `fk_Cliente_Cidade1_idx` ON `roadTrip`.`Cliente` (`cidade` ASC) VIS
 DROP TABLE IF EXISTS `roadTrip`.`Seguro` ;
 
 CREATE TABLE IF NOT EXISTS `roadTrip`.`Seguro` (
-  `idSeguro` INT NOT NULL AUTO_INCREMENT,
-  `dataValidade` DATE NULL,
-  `precoSeguro` DECIMAL(8,2) NULL CHECK (precoSeguro>=0),
-   `descricao` VARCHAR(100) NULL,
+  `idSeguro` INT NOT NULL,
+  `dataValidade` DATE NOT NULL,
+  `precoSeguro` DECIMAL(8,2) NOT NULL,
+  `descricao` VARCHAR(100) NULL,
   PRIMARY KEY (`idSeguro`))
 ENGINE = InnoDB;
 
@@ -161,14 +161,14 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `roadTrip`.`Aluguer` ;
 
 CREATE TABLE IF NOT EXISTS `roadTrip`.`Aluguer` (
-  `idAluguer` INT NOT NULL AUTO_INCREMENT,
+  `idAluguer` INT NOT NULL,
   `dataAluguer` DATE NULL,
   `dataPrevistaLevantamento` DATE NULL,
   `dataPrevistaEntrega` DATE NULL,
-  `dataRealEntrega` DATE NULL,
+  `dataRealEntrega` DATETIME NULL,
   `Cliente` INT NOT NULL,
   `Veiculo` INT NOT NULL,
-  `precoAluguer` DECIMAL(8,2)  NOT NULL ,
+  `precoAluguer` DECIMAL(8,2) NULL,
   `kmsPercorrido` DECIMAL(8,2) NULL,
   `Seguro` INT NOT NULL,
   `Funcionario` INT NOT NULL,

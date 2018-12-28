@@ -20,7 +20,7 @@ SELECT * FROM Aluguer;
 SELECT COUNT(idAluguer) AS nrAlugueres FROM Aluguer
 WHERE YEAR (dataAluguer)= '2018'; 
 
--- Quantos dos nossos clientes são portugueses? (POrtugal id=1)
+-- Quantos dos nossos clientes são portugueses? (Portugal id=1)
 SELECT COUNT(idCliente) AS nrClientesPortugueses FROM Cliente 
 WHERE pais = 1; 
 
@@ -28,6 +28,8 @@ WHERE pais = 1;
 Select marca , a.dataPrevistaEntrega FROM Veiculo AS V INNER JOIN Aluguer AS A
 ON V.idVeiculo=A.Veiculo
 WHERE a.Cliente = 2 AND a.dataPrevistaEntrega > current_date; 
+
+
 
 -- Teste do limite de idade para exercer funcoes na empresa 
 INSERT INTO Funcionario (`idFuncionario`, `data_contrato`, `salario`, `telemovel`, `email`, `nome`, `cidade`,`pais`, `rua`,`dataNascimento`, `FuncionarioSuperior`) 
@@ -51,6 +53,7 @@ SELECT TIMESTAMPDIFF(YEAR, dataAluguer, CURDATE()) from Aluguer;
 INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`, `kmsPercorrido`, `Seguro`, `campanhaDesconto`,`Funcionario`, `caucao`) 
 VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 11, 11, 900.00,1,0.00,2,500); 
 
+-- testar o update do trigger de atualizacao dos quilometros
 UPDATE Aluguer
 SET kmsPercorrido = 500 WHERE idAluguer=1; 
 
