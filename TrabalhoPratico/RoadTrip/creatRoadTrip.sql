@@ -5,22 +5,22 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema onRoad
+-- Schema roadTrip
 -- -----------------------------------------------------
--- DROP SCHEMA IF EXISTS `onRoad` ;
+DROP SCHEMA IF EXISTS `roadTrip` ;
 
 -- -----------------------------------------------------
--- Schema onRoad
+-- Schema roadTrip
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `onRoad` DEFAULT CHARACTER SET utf8 ;
-USE `onRoad` ;
+CREATE SCHEMA IF NOT EXISTS `roadTrip` DEFAULT CHARACTER SET utf8 ;
+USE `roadTrip` ;
 
 -- -----------------------------------------------------
--- Table `onRoad`.`Pais`
+-- Table `roadTrip`.`Pais`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `onRoad`.`Pais` ;
+DROP TABLE IF EXISTS `roadTrip`.`Pais` ;
 
-CREATE TABLE IF NOT EXISTS `onRoad`.`Pais` (
+CREATE TABLE IF NOT EXISTS `roadTrip`.`Pais` (
   `idPais` INT NOT NULL AUTO_INCREMENT,
   `descricao` TEXT NULL,
   PRIMARY KEY (`idPais`))
@@ -28,31 +28,31 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `onRoad`.`Cidade`
+-- Table `roadTrip`.`Cidade`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `onRoad`.`Cidade` ;
+DROP TABLE IF EXISTS `roadTrip`.`Cidade` ;
 
-CREATE TABLE IF NOT EXISTS `onRoad`.`Cidade` (
+CREATE TABLE IF NOT EXISTS `roadTrip`.`Cidade` (
   `idCidade` INT NOT NULL AUTO_INCREMENT,
   `descricao` TEXT NULL,
   `pais` INT NULL,
   PRIMARY KEY (`idCidade`),
   CONSTRAINT `fk_Cidade_Pais1`
     FOREIGN KEY (`pais`)
-    REFERENCES `onRoad`.`Pais` (`idPais`)
+    REFERENCES `roadTrip`.`Pais` (`idPais`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Cidade_Pais1_idx` ON `onRoad`.`Cidade` (`pais` ASC) VISIBLE;
+CREATE INDEX `fk_Cidade_Pais1_idx` ON `roadTrip`.`Cidade` (`pais` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `onRoad`.`Funcionario`
+-- Table `roadTrip`.`Funcionario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `onRoad`.`Funcionario` ;
+DROP TABLE IF EXISTS `roadTrip`.`Funcionario` ;
 
-CREATE TABLE IF NOT EXISTS `onRoad`.`Funcionario` (
+CREATE TABLE IF NOT EXISTS `roadTrip`.`Funcionario` (
   `idFuncionario` INT NOT NULL AUTO_INCREMENT,
   `data_contrato` DATE NOT NULL,
   `salario` DECIMAL(8,2) NOT NULL CHECK (salario>=500),
@@ -67,39 +67,39 @@ CREATE TABLE IF NOT EXISTS `onRoad`.`Funcionario` (
   PRIMARY KEY (`idFuncionario`),
   CONSTRAINT `fk_FuncionarioSuperior`
     FOREIGN KEY (`FuncionarioSuperior`)
-    REFERENCES `onRoad`.`Funcionario` (`idFuncionario`)
+    REFERENCES `roadTrip`.`Funcionario` (`idFuncionario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Funcionario_Cidade1`
     FOREIGN KEY (`cidade`)
-    REFERENCES `onRoad`.`Cidade` (`idCidade`)
+    REFERENCES `roadTrip`.`Cidade` (`idCidade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Funcionario_Pais1`
     FOREIGN KEY (`pais`)
-    REFERENCES `onRoad`.`Pais` (`idPais`)
+    REFERENCES `roadTrip`.`Pais` (`idPais`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_FuncionarioSuperior_idx` ON `onRoad`.`Funcionario` (`FuncionarioSuperior` ASC) VISIBLE;
+CREATE INDEX `fk_FuncionarioSuperior_idx` ON `roadTrip`.`Funcionario` (`FuncionarioSuperior` ASC) VISIBLE;
 
-CREATE INDEX `fk_Funcionario_Cidade1_idx` ON `onRoad`.`Funcionario` (`cidade` ASC) VISIBLE;
+CREATE INDEX `fk_Funcionario_Cidade1_idx` ON `roadTrip`.`Funcionario` (`cidade` ASC) VISIBLE;
 
-CREATE INDEX `fk_Funcionario_Pais1_idx` ON `onRoad`.`Funcionario` (`pais` ASC) VISIBLE;
+CREATE INDEX `fk_Funcionario_Pais1_idx` ON `roadTrip`.`Funcionario` (`pais` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `onRoad`.`Veiculo`
+-- Table `roadTrip`.`Veiculo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `onRoad`.`Veiculo` ;
+DROP TABLE IF EXISTS `roadTrip`.`Veiculo` ;
 
-CREATE TABLE IF NOT EXISTS `onRoad`.`Veiculo` (
+CREATE TABLE IF NOT EXISTS `roadTrip`.`Veiculo` (
   `idVeiculo` INT NOT NULL AUTO_INCREMENT,
-  `matricula` VARCHAR(45) NOT NULL,
+  `matricula` VARCHAR(20) NOT NULL,
   `precoEmNovo` DECIMAL(8,2) NULL CHECK (precoEmNovo>=0),
   `marca` VARCHAR(50) NULL,
-  `modelo` VARCHAR(75) NULL,
+  `modelo` VARCHAR(50) NULL,
   `nr_Kms` DECIMAL(8,2) NULL,
   `anoCompra` DATE NULL,
   `taxaDesvalorizacao` DECIMAL(8,3) NULL,
@@ -108,42 +108,45 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `onRoad`.`Cliente`
+-- Table `roadTrip`.`Cliente`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `onRoad`.`Cliente` ;
+DROP TABLE IF EXISTS `roadTrip`.`Cliente` ;
 
-CREATE TABLE IF NOT EXISTS `onRoad`.`Cliente` (
+CREATE TABLE IF NOT EXISTS `roadTrip`.`Cliente` (
   `idCliente` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(75) NULL,
-  `nif` INT NULL,
-  `dataNascimento` DATE NULL,
-  `pais` INT NULL,
+  `nome` VARCHAR(80) NULL,
+  `nif` INT(5) NULL,
+  `dataNascimento` DATE NOT NULL,
+  `pais` INT NOT NULL,
   `cidade` INT NULL,
-  `rua` VARCHAR(45) NULL,
+  `rua` VARCHAR(100) NULL,
+  `cartaConducao` TINYINT NOT NULL,
+  `email` VARCHAR(45) NULL,
+   `telemovel` INT(9) NULL,
   PRIMARY KEY (`idCliente`),
   CONSTRAINT `fk_Cliente_Pais1`
     FOREIGN KEY (`pais`)
-    REFERENCES `onRoad`.`Pais` (`idPais`)
+    REFERENCES `roadTrip`.`Pais` (`idPais`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Cliente_Cidade1`
     FOREIGN KEY (`cidade`)
-    REFERENCES `onRoad`.`Cidade` (`idCidade`)
+    REFERENCES `roadTrip`.`Cidade` (`idCidade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Cliente_Pais1_idx` ON `onRoad`.`Cliente` (`pais` ASC) VISIBLE;
+CREATE INDEX `fk_Cliente_Pais1_idx` ON `roadTrip`.`Cliente` (`pais` ASC) VISIBLE;
 
-CREATE INDEX `fk_Cliente_Cidade1_idx` ON `onRoad`.`Cliente` (`cidade` ASC) VISIBLE;
+CREATE INDEX `fk_Cliente_Cidade1_idx` ON `roadTrip`.`Cliente` (`cidade` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `onRoad`.`Seguro`
+-- Table `roadTrip`.`Seguro`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `onRoad`.`Seguro` ;
+DROP TABLE IF EXISTS `roadTrip`.`Seguro` ;
 
-CREATE TABLE IF NOT EXISTS `onRoad`.`Seguro` (
+CREATE TABLE IF NOT EXISTS `roadTrip`.`Seguro` (
   `idSeguro` INT NOT NULL AUTO_INCREMENT,
   `dataValidade` DATE NULL,
   `precoSeguro` DECIMAL(8,2) NULL CHECK (precoSeguro>=0),
@@ -152,11 +155,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `onRoad`.`Aluguer`
+-- Table `roadTrip`.`Aluguer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `onRoad`.`Aluguer` ;
+DROP TABLE IF EXISTS `roadTrip`.`Aluguer` ;
 
-CREATE TABLE IF NOT EXISTS `onRoad`.`Aluguer` (
+CREATE TABLE IF NOT EXISTS `roadTrip`.`Aluguer` (
   `idAluguer` INT NOT NULL AUTO_INCREMENT,
   `dataAluguer` DATE NULL,
   `dataPrevistaLevantamento` DATE NULL,
@@ -173,33 +176,33 @@ CREATE TABLE IF NOT EXISTS `onRoad`.`Aluguer` (
   PRIMARY KEY (`idAluguer`),
   CONSTRAINT `fk_Aluguer_Veiculo1`
     FOREIGN KEY (`Veiculo`)
-    REFERENCES `onRoad`.`Veiculo` (`idVeiculo`)
+    REFERENCES `roadTrip`.`Veiculo` (`idVeiculo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Aluguer_Seguro1`
     FOREIGN KEY (`Seguro`)
-    REFERENCES `onRoad`.`Seguro` (`idSeguro`)
+    REFERENCES `roadTrip`.`Seguro` (`idSeguro`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Aluguer_Cliente1`
     FOREIGN KEY (`Cliente`)
-    REFERENCES `onRoad`.`Cliente` (`idCliente`)
+    REFERENCES `roadTrip`.`Cliente` (`idCliente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Aluguer_Funcionario1`
     FOREIGN KEY (`Funcionario`)
-    REFERENCES `onRoad`.`Funcionario` (`idFuncionario`)
+    REFERENCES `roadTrip`.`Funcionario` (`idFuncionario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Aluguer_Veiculo1_idx` ON `onRoad`.`Aluguer` (`Veiculo` ASC) VISIBLE;
+CREATE INDEX `fk_Aluguer_Veiculo1_idx` ON `roadTrip`.`Aluguer` (`Veiculo` ASC) VISIBLE;
 
-CREATE INDEX `fk_Aluguer_Seguro1_idx` ON `onRoad`.`Aluguer` (`Seguro` ASC) VISIBLE;
+CREATE INDEX `fk_Aluguer_Seguro1_idx` ON `roadTrip`.`Aluguer` (`Seguro` ASC) VISIBLE;
 
-CREATE INDEX `fk_Aluguer_Cliente1_idx` ON `onRoad`.`Aluguer` (`Cliente` ASC) VISIBLE;
+CREATE INDEX `fk_Aluguer_Cliente1_idx` ON `roadTrip`.`Aluguer` (`Cliente` ASC) VISIBLE;
 
-CREATE INDEX `fk_Aluguer_Funcionario1_idx` ON `onRoad`.`Aluguer` (`Funcionario` ASC) VISIBLE;
+CREATE INDEX `fk_Aluguer_Funcionario1_idx` ON `roadTrip`.`Aluguer` (`Funcionario` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

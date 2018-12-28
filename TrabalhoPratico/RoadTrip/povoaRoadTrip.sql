@@ -1,10 +1,10 @@
-USE `onRoad` ;
+USE `roadTrip` ;
 
 INSERT INTO `Pais` (`idPais`, `descricao`) 
 VALUES (1, 'Portugal'), 
 (idPais, 'China'), (idPais, 'Espanha'), (idPais, 'Argentina'), (idPais, 'Franca'),
- (idPais, 'Canadá'), (idPais, 'Croácia'), (idPais, 'Suécia'), (idPais, 'Brasil'),
- (idPais, 'Luxemburgo'), (idPais, 'Alemanha'),
+(idPais, 'Canadá'), (idPais, 'Croácia'), (idPais, 'Suécia'), (idPais, 'Brasil'),
+(idPais, 'Luxemburgo'), (idPais, 'Alemanha'),
 (idPais, 'Inglaterra'), (idPais, 'Argélia'), (idPais, 'Austria'), (idPais, 'Belgica');
  
  INSERT INTO `Seguro` (`idSeguro`, `dataValidade`, `precoSeguro`) VALUES (1, '2019-12-16', '2.90'),
@@ -43,28 +43,27 @@ VALUES (1, '47-WT-55', '25000.00', 'Fiat', 'Punto', '1056.00', '2018-05-20', '0.
 (idVeiculo, '47-ZZ-50', '28900.00', 'Renault', 'Zoe', '2223.00', '2018-08-27', '0.008'); 
 
 
-INSERT INTO `Cliente` (`idCliente`, `nome`, `nif`, `dataNascimento`, `pais`, `cidade`, `rua`) 
-VALUES (1, 'Célia Figueiredo', '262646080', '1993-12-24', '1', '13', 'rua da Costa'), 
-(idCliente, 'Rita Pereira', '262646080', '1984-05-06', '1', '12', 'rua da rita'), 
-(idCliente, 'Manuela Ferreira Leite', '112646080', '1965-12-24', '1', '14', 'rua da Costa'), 
-(idCliente, 'Márcia Figueiredo', '262646080', '1994-01-21', '1', '3', 'rua do pinheiro'),
-(idCliente, 'Junior', '262646080', '1993-12-24', '1', '15', 'rua da Costa'), 
-(idCliente, 'Pedro', '262646080', '1993-12-24', '1', '16', 'rua da Costa'), 
-(idCliente, 'Marco', '262646080', '1993-12-24', '1', '17', 'rua da Costa'), 
-(idCliente, 'Luis', '262646080', '1993-12-24', '1', '18', 'rua da Costa'), 
-(idCliente, 'Ricardo', '262646080', '1993-12-24', '1', '19', 'rua da Costa'), 
-(idCliente, 'Joana', '262646080', '1993-12-24', '1', '20', 'rua da Costa'), 
-(idCliente, 'Margarida', '262646080', '1993-12-24', '1', '21', 'rua da Costa'), 
-(idCliente, 'Juliana', '262646080', '1993-12-24', '1', '22', 'rua da Costa'), 
-(idCliente, 'Cristina', '262646080', '1993-12-24', '1', '23', 'rua da Costa'), 
-(idCliente, 'Maria', '262646080', '1993-12-24', '1', '24', 'rua da Costa'), 
-(idCliente, 'Josefina Catarro', '262646080', '1993-12-24', '1', '25', 'rua da Costa'), 
-(idCliente, 'José Carlos Malato', '262246080', '1993-12-24', '1', '17', 'rua da Costa'), 
-(idCliente, 'Catalina Pestana', '232646080', '1980-12-24', '1', '11', 'rua da Costa'), 
-(idCliente, 'António Costa', '342645080', '1974-12-24', '1', '11', 'rua da Costa'), 
-(idCliente, 'José Socrates', '782666080', '1970-12-24', '1', '11', 'rua da Costa'), 
-(idCliente, 'Luis Montenegro', '197646080', '1971-01-13', '1', '11', 'rua da Costa') ; 
-
+INSERT INTO `Cliente` (`idCliente`, `nome`, `nif`, `dataNascimento`, `pais`, `cidade`, `rua`, `cartaConducao`, `email`, `telemovel`) 
+VALUES (1, 'Célia Figueiredo', '262646080', '1993-12-24', '1', '13', 'rua da Costa', 1,'a@gmail.com','912345678'), 
+(idCliente, 'Rita Pereira', '262646080', '1984-05-06', '1', '12', 'rua da rita', 1,'a@gmail.com','912345678'), 
+(idCliente, 'Manuela Ferreira Leite', '112646080', '1965-12-24', '1', '14', 'rua da Costa', '1','a@gmail.com','912345678'), 
+(idCliente, 'Márcia Figueiredo', '262646080', '1994-01-21', '1', '3', 'rua do pinheiro', '1','a@gmail.com','912345678'),
+(idCliente, 'Junior', '262646080', '1993-12-24', '1', '15', 'rua da Costa', 1,'a@gmail.com','912345678'), 
+(idCliente, 'Pedro', '262646080', '1993-12-24', '1', '16', 'rua da Costa', '1','a@gmail.com','912345678'), 
+(idCliente, 'Marco', '262646080', '1993-12-24', '1', '17', 'rua da Costa', '1','a@gmail.com',912345678), 
+(idCliente, 'Luis', '262646080', '1993-12-24', '1', '18', 'rua da Costa', '1','a@gmail.com',912345678), 
+(idCliente, 'Ricardo', '262646080', '1993-12-24', '1', '19', 'rua da Costa', '1','a@gmail.com',91234544), 
+(idCliente, 'Joana', '262646080', '1993-12-24', '1', '20', 'rua da Costa', '1','a@gmail.com',934567098), 
+(idCliente, 'Margarida', '262646080', '1993-12-24', '1', '21', 'rua da Costa', '1','a@gmail.com', 987654909), 
+(idCliente, 'Juliana', '262646080', '1993-12-24', '1', '22', 'rua da Costa', '1','a@gmail.com',0000000), 
+(idCliente, 'Cristina', '262646080', '1993-12-24', '1', '23', 'rua da Costa', '1','a@gmail.com',0000000), 
+(idCliente, 'Maria', '262646080', '1993-12-24', '1', '24', 'rua da Costa', '1','a@gmail.com',00000000), 
+(idCliente, 'Josefina Catarro', '262646080', '1993-12-24', '1', '25', 'rua da Costa', '1','a@gmail.com',0000000), 
+(idCliente, 'José Carlos Malato', '262246080', '1993-12-24', '1', '17', 'rua da Costa', '1','a@gmail.com',923454444), 
+(idCliente, 'Catalina Pestana', '232646080', '1980-12-24', '1', '11', 'rua da Costa', '1','a@gmail.com',912223345), 
+(idCliente, 'António Costa', '342645080', '1974-12-24', '1', '11', 'rua da Costa', '1','a@gmail.com',912227777), 
+(idCliente, 'José Socrates', '782666080', '1970-12-24', '1', '11', 'rua da Costa', '1','a@gmail.com',967778889), 
+(idCliente, 'Luis Montenegro', '197646080', '1971-01-13', '1', '11', 'rua da Costa', '1','a@gmail.com',922222787) ; 
 
 
 INSERT INTO `Funcionario` (`idFuncionario`, `data_contrato`, `salario`, `telemovel`, `email`, `nome`, `cidade`,`pais`, `rua`,`dataNascimento`, `FuncionarioSuperior`) 
@@ -73,7 +72,6 @@ VALUES (1, '2008-12-24', '1000.00', '933337717', 'celia@gmail.com', 'Natália Le
 (idFuncionario, '2017-01-24', '900.00', '963126799', 'socrates@gmail.com', 'Socrates Lemos', 11, 1,'rua da Penuria', '1991-12-24',1),
 (idFuncionario, '2018-12-24', '800.00', '913336617', 'mendes@gmail.com', 'Fernando Mendes', 13, 1,'rua do preco certo','1987-12-24', 2), 
 (idFuncionario, '2018-12-24', '850.00', '924447717', 'celia@gmail.com', 'Pedro Mexia', 13, 1,'rua do mexia', '1989-12-24',1); 
-
 
 
 INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`,`precoAluguer`, `kmsPercorrido`, `Seguro`, `campanhaDesconto`,`Funcionario`, `caucao`) 
@@ -105,6 +103,3 @@ VALUES (1, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 11, 11,250.00
 (idAluguer, '2018-12-04', '2018-12-24', '2018-12-24', '2018-12-24', 18, 5,250.00, 89.00,1,0.00,2,500),
 (idAluguer, '2018-09-04', '2018-10-24', '2018-11-24', '2018-11-24', 17, 6,250.00, 443.00,1,0.00,4,500),
 (idAluguer, '2018-12-24', '2018-12-24', '2018-12-24', '2019-12-24', 16, 7,250.00, 4567.00,1,0.00,3,500); 
-
-
-
