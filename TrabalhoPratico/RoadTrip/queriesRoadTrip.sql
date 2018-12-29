@@ -50,7 +50,6 @@ INNER JOIN Aluguer as a
     
     
 
-
 -- Teste do limite de idade para exercer funcoes na empresa 
 INSERT INTO Funcionario (`idFuncionario`, `data_contrato`, `salario`, `telemovel`, `email`, `nome`, `cidade`,`pais`, `rua`,`dataNascimento`, `FuncionarioSuperior`) 
 VALUES
@@ -70,8 +69,8 @@ SELECT TIMESTAMPDIFF(YEAR, dataAluguer, CURDATE()) from Aluguer;
 
 -- testar o trigger de atualizacao de preco de aluguer 
 
-INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`, `kmsPercorrido`, `Seguro`, `campanhaDesconto`,`Funcionario`, `caucao`) 
-VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 11, 11, 900.00,1,0.00,2,500); 
+INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`, `kmsPercorrido`, `Seguro`,`Funcionario`, `caucao`) 
+VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 11, 11, 900.00,1,2,500); 
 
 -- testar o update do trigger de atualizacao dos quilometros
 UPDATE Aluguer
