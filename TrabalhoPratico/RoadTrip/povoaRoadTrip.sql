@@ -7,10 +7,12 @@ VALUES (1, 'Portugal'),
 (idPais, 'Luxemburgo'), (idPais, 'Alemanha'),
 (idPais, 'Inglaterra'), (idPais, 'Argélia'), (idPais, 'Austria'), (idPais, 'Belgica');
  
- INSERT INTO `Seguro` (`idSeguro`, `dataValidade`, `precoSeguro`, `descricao`) VALUES (1, '2019-12-16', '5.60', 'Seguro contra todos os riscos'),
-(idSeguro, '2020-11-19', '3.30', 'seguro contra danos'),  (idSeguro, '2018-11-05', '2.80', 'seguro pobre');
+ INSERT INTO `Seguro` (`idSeguro`, `dataValidade`, `precoSeguro`, `descricao`) 
+ VALUES (1, '2019-12-16', '5.60', 'A - Seguro contra todos os riscos'),
+(idSeguro, '2020-11-19', '3.30', 'B - seguro contra danos'),  (idSeguro, '2018-11-05', '2.80', 'C - seguro pobre');
 
-INSERT INTO `Cidade` (`idCidade`, `designacao`, `pais`) VALUES (1, ' Coimbra', 1), (idCidade, ' Leiria', 1), (idCidade, ' Guimaraes', 1), 
+INSERT INTO `Cidade` (`idCidade`, `designacao`, `pais`) 
+VALUES (1, ' Coimbra', 1), (idCidade, ' Leiria', 1), (idCidade, ' Guimaraes', 1), 
 (idCidade, ' Silves', 1), (idCidade, ' Tomar', 1), (idCidade, ' Beja', 1), (idCidade, ' Viana do Castelo', 1), 
 (idCidade, ' Tavira', 1),(idCidade, ' Cascais', 1), (idCidade, ' Portalegre', 1), (idCidade, ' Lisboa', 1), (idCidade, ' Viseu', 1),
  (idCidade, ' Barcelos', 1), (idCidade, ' Vila Nova de Famalicão', 1), (idCidade, ' Aveiro', 1), (idCidade, ' Faro', 1), 
@@ -60,7 +62,8 @@ VALUES (1, 'Célia Figueiredo', '262646080', '1993-12-24', '1', '13', 'rua da Co
 (idCliente, 'Luis Montenegro', '197646080', '1971-01-13', '1', '11', 'rua da Costa', '1','a@gmail.com',922222787) ; 
 
 
-INSERT INTO `Funcionario` (`idFuncionario`, `data_contrato`, `salario`, `telemovel`, `email`, `nome`, `cidade`,`pais`, `rua`,`dataNascimento`, `FuncionarioSuperior`) 
+INSERT INTO `Funcionario` (`idFuncionario`, `data_contrato`, `salario`, `telemovel`, `email`, `nome`, `cidade`,`pais`, `rua`,`dataNascimento`, 
+`FuncionarioSuperior`) 
 VALUES (1, '2008-12-24', '1000.00', '933337717', 'celianatalia@gmail.com', 'Natália Lemos', 13, 1,'rua da Costa','1994-12-24', null), 
 (idFuncionario, '2015-12-24', '1300.00', '933337717', 'celia@gmail.com', 'Celia Costa', 13, 1,'rua da Costa','1990-12-24', null),
 (idFuncionario, '2017-01-24', '900.00', '963126799', 'socrates@gmail.com', 'Socrates Lemos', 11, 1,'rua da Penuria', '1991-12-24',1),
@@ -68,7 +71,8 @@ VALUES (1, '2008-12-24', '1000.00', '933337717', 'celianatalia@gmail.com', 'Nat�
 (idFuncionario, '2018-12-24', '850.00', '924447717', 'pedro@gmail.com', 'Pedro Mexia', 13, 1,'rua do mexia', '1989-12-24',1); 
 
 
-INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`,`precoAluguer`, `kmsPercorrido`, `Seguro`,`Funcionario`, `caucao`) 
+INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, 
+`dataRealEntrega`, `Cliente`, `Veiculo`,`precoAluguer`, `kmsPercorrido`, `Seguro`,`Funcionario`, `caucao`) 
 VALUES (1, '2018-12-26', '2018-12-30', '2019-01-13', '2019-01-13', 11, 1,250.00, 900.00,1,2,500), 
 (idAluguer, '2018-06-24', '2018-06-30', '2018-07-24', '2018-07-24', 2, 2,250.00, 800.00,1,2,500),
 (idAluguer, '2018-06-01', '2018-06-07', '2018-06-30', '2018-06-30', 12, 3,250.00, 600.00,1,1,500),
