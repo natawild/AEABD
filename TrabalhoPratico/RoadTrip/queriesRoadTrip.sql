@@ -30,6 +30,26 @@ ON V.idVeiculo=A.Veiculo
 WHERE a.Cliente = 2 AND a.dataPrevistaEntrega > current_date; 
 
 
+-- Lista dos 5 clientes que mais efetuaram alugures em 2018 
+SELECT nome, COUNT(a.idAluguer) as nAlugueres from Cliente as c 
+INNER JOIN Aluguer as a 
+	ON c.idCliente=a.Cliente 
+    WHERE YEAR (a.dataAluguer) = '2018' 
+    GROUP BY idCliente 
+    ORDER BY nAlugueres desc 
+    LIMIT 5;  
+
+-- os clientes com mais de 2 alugueres na empresa 
+SELECT nome, COUNT(a.idAluguer) as nAlugueres from Cliente as c 
+INNER JOIN Aluguer as a 
+	ON c.idCliente=a.Cliente 
+    GROUP BY idCliente 
+    HAVING nAlugueres >2
+    ORDER BY nAlugueres desc 
+    LIMIT 5;  
+    
+    
+
 
 -- Teste do limite de idade para exercer funcoes na empresa 
 INSERT INTO Funcionario (`idFuncionario`, `data_contrato`, `salario`, `telemovel`, `email`, `nome`, `cidade`,`pais`, `rua`,`dataNascimento`, `FuncionarioSuperior`) 
@@ -56,6 +76,9 @@ VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 11, 1
 -- testar o update do trigger de atualizacao dos quilometros
 UPDATE Aluguer
 SET kmsPercorrido = 500 WHERE idAluguer=1; 
+
+
+
 
 
 

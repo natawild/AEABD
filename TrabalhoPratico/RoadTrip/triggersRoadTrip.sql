@@ -65,7 +65,7 @@ begin
 	set precoPorDia :=(precoDocarroNovo - (precoDocarroNovo*taxas*anosDoCarro))/365; 
   
 	if New.precoAluguer is null then
-		set New.precoAluguer = precoPorDia*diasDeAluguer+seguro ; 
+		set New.precoAluguer = precoPorDia*diasDeAluguer+seguro*diasDeAluguer ; 
 	end if ; 
   
 end; $$
