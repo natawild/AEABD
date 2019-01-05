@@ -162,9 +162,9 @@ DROP TABLE IF EXISTS `roadTrip`.`Aluguer` ;
 
 CREATE TABLE IF NOT EXISTS `roadTrip`.`Aluguer` (
   `idAluguer` INT NOT NULL AUTO_INCREMENT,
-  `dataAluguer` DATE NULL,
-  `dataPrevistaLevantamento` DATE NULL,
-  `dataPrevistaEntrega` DATE NULL,
+  `dataAluguer` DATE NOT NULL,
+  `dataPrevistaLevantamento` DATE NOT NULL,
+  `dataPrevistaEntrega` DATE NOT NULL,
   `dataRealEntrega` DATE NULL,
   `Cliente` INT NOT NULL,
   `Veiculo` INT NOT NULL,

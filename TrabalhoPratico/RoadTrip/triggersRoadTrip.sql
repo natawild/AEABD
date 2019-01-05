@@ -93,4 +93,35 @@ end; $$
 
 
 
+-- drop procedure registarAluguerParaClienteNovo
+
+delimiter $$
+create procedure registarAluguerParaClienteNovo (IN NomeCliente VARCHAR(80), IN dataNasc DATE, IN Pais INT, in cartaConducao tinyint,
+																				IN  Veiculo INT, IN Seguro INT,IN  Funcionario INT, IN caucao DECIMAL(8,2), IN dataAluguer DATE, 
+                                                                                IN dataPrevistaLevantamento DATE, IN dataPrevistaEntrega DATE)
+                                                                                
+BEGIN 
+declare AluguerID INT;
+declare ClienteID INT; 
+declare erro bool default 0;
+declare continue handler for sqlexception set erro=1;
+
+start transaction;
+
+insert into Cliente (idCliente,nome,dataNascimento, pais, cartaConducao )
+			values (idCliente,NomeCliente,dataNasc, Pais, cartaConducao ); 
+select idCliente into ClienteID
+from Cliente
+order by idCliente DESC 
+LIMIT 1;
+
+insert into Aluguer (idAluguer,dataAluguer,dataPrevistaLevantamento,dataPrevistaEntrega,Cliente,Veiculo,Seguro, Funcionario,caucao) 
+		values (idAluguer,dataAluguer,dataPrevistaLevantamento,dataPrevistaEntrega,ClienteID,Veiculo,Seguro, Funcionario,caucao);        
+
+
+IF ERRO
+THEN rollback;
+ELSE COMMIT; 
+END IF;
+END $$
 

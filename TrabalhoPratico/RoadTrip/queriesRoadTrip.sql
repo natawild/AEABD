@@ -1,5 +1,4 @@
 
--- antes de apagar um utilizador com vendas guardas as vendas realizadas como se fosse um utilizador não registado 
 
 SELECT * FROM Pais; 
 
@@ -16,7 +15,7 @@ SELECT * FROM Veiculo;
 SELECT * FROM Aluguer; 
 
 UPDATE Aluguer
-SET dataRealEntrega = null 
+SET dataRealEntrega = null ,dataPrevistaEntrega = '2019-01-03'
 WHERE idAluguer = 2; 
 
 
@@ -66,14 +65,37 @@ WHERE a.Cliente = 2 AND a.dataPrevistaEntrega > current_date;
 SELECT V.marca, V.matricula, a.dataPrevistaEntrega FROM Veiculo as V
 INNER JOIN Aluguer AS a
 	ON V.idVeiculo=a.Veiculo
-    WHERE a.dataPrevistaEntrega > current_date AND dataRealEntrega = null ; 
+    WHERE a.dataPrevistaEntrega <= current_date AND dataRealEntrega is null ; 
+
+
+--     quais os clientes que alugaram carros com o tipo de seguro A 
+SELECT DISTINCT (C. idCliente), C.nome, S.descricao FROM Cliente AS C 
+INNER JOIN Aluguer AS A 
+	ON C.idCliente=A.Cliente
+    INNER JOIN Seguro AS S 
+		ON A.Seguro=S.idSeguro
+        WHERE S.descricao LIKE '%A - %'; 
+-- ou 
+
+SELECT DISTINCT (C. idCliente), C.nome FROM Cliente AS C 
+INNER JOIN Aluguer AS A 
+	ON C.idCliente=A.Cliente
+        WHERE a.Seguro = 1; 
+        
+        
+-- quais os funcionário que efetuaram mais vendas no mes de dezembro de 2018 
+SELECT SUM(A.precoAluguer) AS vendas, F.nome FROM Funcionario as F 
+INNER JOIN Aluguer AS A 
+	ON F.idFuncionario=A.Funcionario
+		WHERE YEAR (A.dataAluguer) = '2018' AND MONTH (A.dataAluguer) = '12'
+        GROUP BY F.idFuncionario
+        ORDER BY vendas DESC
+        LIMIT 2; 
+
+SELECT MONTH ('2018-12-01'); 
 
 
 
-    
---     quais os clientes que alugrama carros com o tipo de seguro A 
-
-    
 
 -- Teste do limite de idade para exercer funcoes na empresa 
 INSERT INTO Funcionario (`idFuncionario`, `data_contrato`, `salario`, `telemovel`, `email`, `nome`, `cidade`,`pais`, `rua`,`dataNascimento`, `FuncionarioSuperior`) 
@@ -99,6 +121,13 @@ VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 11, 1
 -- testar o update do trigger de atualizacao dos quilometros
 UPDATE Aluguer
 SET kmsPercorrido = 500 WHERE idAluguer=1; 
+
+UPDATE Aluguer
+SET kmsPercorrido = -500 WHERE idAluguer=1; 
+
+
+-- testar o procedimento para a inserção de um novo cliente não registado 
+call registarAluguerParaClienteNovo ('Luis', '1989-06-22', 1, 1, 7, 1,  3, 900, '2018-10-29','2019-01-01','2019-01-20' ) ; 
 
 
 
