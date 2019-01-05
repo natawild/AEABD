@@ -15,19 +15,9 @@ SELECT * FROM Veiculo;
 
 SELECT * FROM Aluguer; 
 
-
--- Quantos alugueres tivemos em 2018?
-SELECT COUNT(idAluguer) AS nrAlugueres FROM Aluguer
-WHERE YEAR (dataAluguer)= '2018'; 
-
--- Quantos dos nossos clientes são portugueses? (Portugal id=1)
-SELECT COUNT(idCliente) AS nrClientesPortugueses FROM Cliente 
-WHERE pais = 1; 
-
--- Quais os veiculos alugados pela Rita Pereira que ainda não foram entregues?
-Select marca , a.dataPrevistaEntrega FROM Veiculo AS V INNER JOIN Aluguer AS A
-ON V.idVeiculo=A.Veiculo
-WHERE a.Cliente = 2 AND a.dataPrevistaEntrega > current_date; 
+UPDATE Aluguer
+SET dataRealEntrega = null 
+WHERE idAluguer = 2; 
 
 
 -- Lista dos 5 clientes que mais efetuaram alugures em 2018 
@@ -47,7 +37,42 @@ INNER JOIN Aluguer as a
     HAVING nAlugueres >2
     ORDER BY nAlugueres desc 
     LIMIT 5;  
+
+
+-- Quantos alugueres tivemos em 2018?
+SELECT COUNT(idAluguer) AS nrAlugueres FROM Aluguer
+WHERE YEAR (dataAluguer)= '2018'; 
+
+
+-- Quantos dos nossos clientes sao de Portugal? (Portugal id=1)
+SELECT COUNT(idCliente) AS nrClientesPortugueses FROM Cliente 
+WHERE pais = 1; 
+
+-- ou 
+
+SELECT COUNT(idCliente) AS nrClientesPortugueses FROM Cliente as C
+	INNER JOIN Pais as P
+		ON C.Pais=P.idPais
+WHERE P.designacao = 'Portugal'; 
+
+
+-- Quais os veiculos alugados pela Rita Pereira que ainda não foram entregues?
+Select marca , a.dataPrevistaEntrega FROM Veiculo AS V INNER JOIN Aluguer AS A
+ON V.idVeiculo=A.Veiculo
+WHERE a.Cliente = 2 AND a.dataPrevistaEntrega > current_date; 
+
+
+-- Quais os veiculos que a sua entrega está atrasada 
+SELECT V.marca, V.matricula, a.dataPrevistaEntrega FROM Veiculo as V
+INNER JOIN Aluguer AS a
+	ON V.idVeiculo=a.Veiculo
+    WHERE a.dataPrevistaEntrega > current_date AND dataRealEntrega = null ; 
+
+
+
     
+--     quais os clientes que alugrama carros com o tipo de seguro A 
+
     
 
 -- Teste do limite de idade para exercer funcoes na empresa 
@@ -57,7 +82,7 @@ VALUES
 
 INSERT INTO Funcionario (`idFuncionario`, `data_contrato`, `salario`, `telemovel`, `email`, `nome`, `cidade`,`pais`, `rua`,`dataNascimento`, `FuncionarioSuperior`) 
 VALUES
-(idFuncionario, '2018-12-24', '850.00', '924447717', 'celia@gmail.com', 'Pedro Mexia', 13, 1,'rua do mexia', '2015-12-24',1); 
+(idFuncionario, '2018-12-24', '850.00', '924222717', 'celia@gmail.com', 'Pedro Mexia', 13, 1,'rua do mexia', '2015-12-24',1); 
 
 
 -- Teste do trigger da idade do cliente 
@@ -68,7 +93,6 @@ VALUES (idCliente, 'Célia Figueiredo', '262646080', '2016-12-24', '1', '13', 'r
 SELECT TIMESTAMPDIFF(YEAR, dataAluguer, CURDATE()) from Aluguer; 
 
 -- testar o trigger de atualizacao de preco de aluguer 
-
 INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`, `kmsPercorrido`, `Seguro`,`Funcionario`, `caucao`) 
 VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 11, 11, 900.00,1,2,500); 
 
