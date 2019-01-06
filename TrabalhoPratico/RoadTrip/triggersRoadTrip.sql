@@ -93,6 +93,26 @@ end; $$
 
 
 
+-- trigger que verifica se o Cliente tem carta de condução, caso não tenha não deixa efetuar o aluguer 
+-- drop trigger verificaCartaConducao 
+delimiter $$
+create trigger verificaCartaConducao
+before insert on Aluguer
+for each row 
+begin
+	DECLARE msg varchar(255);
+	declare cartaCond tinyint; 
+	
+    select cartaConducao into cartaCond from Cliente where idCliente=new.Cliente;
+	if cartaCond = 0 then 
+		set msg= 'Aluguer rejeitado porque cliente não tem carta de conducao';
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg; 
+	end if; 
+end 
+$$
+
+
+
 -- drop procedure registarAluguerParaClienteNovo
 
 delimiter $$

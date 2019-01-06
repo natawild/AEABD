@@ -130,8 +130,12 @@ SET kmsPercorrido = -500 WHERE idAluguer=1;
 call registarAluguerParaClienteNovo ('Luis', '1989-06-22', 1, 1, 7, 1,  3, 900, '2018-10-29','2019-01-01','2019-01-20' ) ; 
 
 
+UPDATE Cliente 
+SET cartaConducao = 0 Where idCliente=20; 
 
-
+-- testar o trigger que valida se o cliente que aluga tem carta de carta de condução 
+INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`, `kmsPercorrido`, `Seguro`,`Funcionario`, `caucao`) 
+VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 20, 11, 900.00,1,2,500); 
 
 
 
