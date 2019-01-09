@@ -121,7 +121,6 @@ create procedure registarAluguerParaClienteNovo (IN NomeCliente VARCHAR(80), IN 
                                                                                 IN dataPrevistaLevantamento DATE, IN dataPrevistaEntrega DATE)
                                                                                 
 BEGIN 
-declare AluguerID INT;
 declare ClienteID INT; 
 declare erro bool default 0;
 declare continue handler for sqlexception set erro=1;
