@@ -120,10 +120,25 @@ VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 11, 1
 
 -- testar o update do trigger de atualizacao dos quilometros
 UPDATE Aluguer
-SET kmsPercorrido = 500 WHERE idAluguer=1; 
+SET kmsPercorrido = 250 WHERE idAluguer=4; 
 
+-- mostrar o erro 
 UPDATE Aluguer
 SET kmsPercorrido = -500 WHERE idAluguer=1; 
+
+-- Inserir um aluguer para o veiculo 4 
+INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, 
+`dataRealEntrega`, `Cliente`, `Veiculo`,`precoAluguer`, `kmsPercorrido`, `Seguro`,`Funcionario`, `caucao`) 
+VALUES 
+(idAluguer, '2018-01-24', '2018-02-24', '2018-03-24', null , 2, 4,550.00, 0,2,1,500); 
+
+UPDATE Aluguer
+SET kmsPercorrido = 200 WHERE idAluguer=30;  -- após este update o veiculo deverá ficar com 450
+
+-- exemplo do erro: o funcionário inseriu o valor errado, afinal deveria ser 250: os que estavam lá 450 - 200 mal adicionados + 250 = 500 
+UPDATE Aluguer
+SET kmsPercorrido = 250 WHERE idAluguer=30;
+
 
 
 -- testar o procedimento para a inserção de um novo cliente não registado 

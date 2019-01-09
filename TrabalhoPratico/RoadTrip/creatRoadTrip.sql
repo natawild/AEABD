@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `roadTrip`.`Aluguer` (
   `Cliente` INT NOT NULL,
   `Veiculo` INT NOT NULL,
   `precoAluguer` DECIMAL(8,2)  NOT NULL ,
-  `kmsPercorrido` DECIMAL(8,2) NULL,
+  `kmsPercorrido` DECIMAL(8,2) NOT NULL,
   `Seguro` INT NOT NULL,
   `Funcionario` INT NOT NULL,
   `caucao` DECIMAL(8,2) NOT NULL,

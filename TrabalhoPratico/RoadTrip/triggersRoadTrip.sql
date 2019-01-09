@@ -79,7 +79,7 @@ before update on Aluguer
 for each row 
 begin
 DECLARE msg varchar(255);
-	if New.kmsPercorrido <> old.kmsPercorrido && (old.kmsPercorrido = 0 || old.kmsPercorrido is null) && new.kmsPercorrido>0  then 
+	if New.kmsPercorrido <> old.kmsPercorrido && old.kmsPercorrido = 0 && new.kmsPercorrido>0  then 
 		update Veiculo 
 			set nr_Kms= nr_Kms + New.kmsPercorrido where idVeiculo=New.Veiculo; -- se é 1ª vez adiciona o novo valor
 	elseif new.kmsPercorrido>0 then 
