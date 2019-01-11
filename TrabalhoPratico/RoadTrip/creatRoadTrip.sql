@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `roadTrip`.`Funcionario` ;
 CREATE TABLE IF NOT EXISTS `roadTrip`.`Funcionario` (
   `idFuncionario` INT NOT NULL AUTO_INCREMENT,
   `data_contrato` DATE NOT NULL,
-  `salario` DECIMAL(8,2) NOT NULL CHECK (salario>=500),
+  `salario` DECIMAL(8,2) NOT NULL CHECK (salario>=580),
   `telemovel` INT NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `nome` VARCHAR(45) NOT NULL,

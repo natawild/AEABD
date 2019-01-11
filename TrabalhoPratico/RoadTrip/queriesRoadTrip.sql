@@ -152,5 +152,25 @@ SET cartaConducao = 0 Where idCliente=20;
 INSERT INTO `Aluguer` (`idAluguer`, `dataAluguer`, `dataPrevistaLevantamento`, `dataPrevistaEntrega`, `dataRealEntrega`, `Cliente`, `Veiculo`, `kmsPercorrido`, `Seguro`,`Funcionario`, `caucao`) 
 VALUES (idAluguer, '2018-12-24', '2018-12-30', '2019-01-13', '2019-01-13', 20, 11, 900.00,1,2,500); 
 
+-- o nome das pessoas que alugam fiat 
+SELECT DISTINCT C.nome, V.marca From Cliente as C
+			INNER JOIN Aluguer as A 
+				ON C.idCliente = A.Cliente
+                INNER JOIN Veiculo as V
+                ON A.Veiculo = V.idVeiculo
+                -- WHERE A.veiculo = 1 ; 
+				WHERE V.marca = 'fiat'; 
 
+-- Para saber o tamanho da base de dados 
+SELECT table_schema "roadTrip",
+        ROUND(SUM(data_length + index_length) / 1024 / 1024, 1) "DB Size in MB" 
+FROM information_schema.tables 
+GROUP BY table_schema; 
+
+
+SELECT
+SUM(ROUND(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024 / 1024), 2)) AS "SIZE IN GB"
+FROM INFORMATION_SCHEMA.TABLES
+WHERE
+TABLE_SCHEMA = "roadTrip";
 

@@ -86,7 +86,7 @@ DECLARE msg varchar(255);
 		update Veiculo 
 			set nr_Kms= nr_Kms - old.kmsPercorrido + New.kmsPercorrido where idVeiculo=New.Veiculo;  -- caso aconteça algum erro de escrita permite atualizar e manter a integridade do dos dados com a tabela aluguer
 	else 
-		set msg= 'Número de kms adicionado incorreto';
+		set msg= 'Número de kms adicionado incorreto'	;
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = msg; 
 	end if;
 end; $$
